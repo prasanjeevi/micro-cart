@@ -1,0 +1,9 @@
+server:
+  port: 8800
+spring:
+  application:
+    name: micro-cart
+  security:
+    user:
+      name: admin
+      password: password-1

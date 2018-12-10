@@ -1,0 +1,31 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: product-catalog
+  security:
+    user:
+      name: admin
+      password: password-1
+  jpa:
+    generate-ddl: true
+    # hibernate:
+    #   ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: "jdbc:mysql://localhost/product"
+      username: root
+      password: password-1
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cache:
+      type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379

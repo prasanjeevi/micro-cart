@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Micro Cart</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Micro Cart</a>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="section">
+    <h4>Products</h4>
+    <div class="row">
+      <div class="col s12 m3" th:each="product : ${products}">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title" th:text="|${product.name}|"></span>
+            <p th:text="|$${product.price}|"></p>
+          </div>
+          <div class="card-action">
+            <a th:href="@{|/product/${product.id}|}">Order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="section">
+    <h4>Top Products</h4>
+    <div class="row">
+      <div class="col s12 m3" th:each="product : ${topProducts}">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title" th:text="|${product.name}|"></span>
+            <p th:text="|$${product.price}|"></p>
+          </div>
+          <div class="card-action">
+            <a th:href="@{|/product/${product.id}|}">Order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="section">
+    <h4>Recent Orders</h4>
+    <div class="row">
+      <div class="col s12 m3" th:each="product : ${recentProducts}">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title" th:text="|${product.name}|"></span>
+            <p th:text="|$${product.price}|"></p>
+          </div>
+          <div class="card-action">
+            <a th:href="@{|/product/${product.id}|}">Order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <footer class="page-footer orange">
+      <div class="container">
+          <div class="row">
+            <div class="col l3 s12">
+              <h5 class="white-text">Bookmarks</h5>
+              <ul>
+                <li><a class="white-text" href="/demo" target="_blank">Demo</a></li>
+                <li><a class="white-text" href="http://product-catalog.apps.cnpsandbox.dryice01.in.hclcnlabs.com/" target="_blank">Product Catalog</a></li>
+              </ul>
+            </div>
+            <div class="col l3 s12">
+              <h5 class="white-text">Pivotal Cloud Foundry</h5>
+              <ul>
+                <li><a class="white-text" href="https://apps.sys.cnpsandbox.dryice01.in.hclcnlabs.com" target="_blank">Apps Manager</a></li>
+                <li><a class="white-text" href="https://opsman.cnpsandbox.dryice01.in.hclcnlabs.com" target="_blank">Ops Manager</a></li>
+                <li><a class="white-text" href="https://arw25010.live.dynatrace.com" target="_blank">Dynatrace</a></li>
+                <li><a class="white-text" href="https://aquasec.sys.cnpsandbox.dryice01.in.hclcnlabs.com" target="_blank">Aquasec</a></li>
+                <li><a class="white-text" href="http://ci.dryice01.in.hclcnlabs.com/" target="_blank">Concourse</a></li>
+              </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Spring Cloud Services</h5>
+                <ul>
+                  <li><a class="white-text" href="https://eureka-1b41615e-c3d7-481d-a225-1628535d4e96.apps.cnpsandbox.dryice01.in.hclcnlabs.com" target="_blank">Service Registry</a></li>
+                  <li><a class="white-text" href="https://hystrix-d49026cc-b515-4b12-aa9f-6a1bc4c69593.apps.cnpsandbox.dryice01.in.hclcnlabs.com/hystrix/monitor?stream=https%3A%2F%2Fturbine-d49026cc-b515-4b12-aa9f-6a1bc4c69593.apps.cnpsandbox.dryice01.in.hclcnlabs.com%2Fturbine.stream" target="_blank">Circuit Breaker</a></li>
+                  <li><a class="white-text" href="https://spring-cloud-broker.apps.cnpsandbox.dryice01.in.hclcnlabs.com/dashboard/p-config-server/7133399f-c874-4cf2-9fa1-aa525acae994" target="_blank">Config Server</a></li>
+                  <li><a class="white-text" href="https://pivotal-rabbitmq.sys.cnpsandbox.dryice01.in.hclcnlabs.com" target="_blank">RabbitMQ</a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Cloud Native - Micro Cart
+      </div>
+    </div>
+  </footer>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+
+  </body>
+</html>

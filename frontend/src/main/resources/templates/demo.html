@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>Micro Cart</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Demo</a>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="section">
+      <div class="row">
+        <div class="col s12 m3">
+          <h4>HTTP Status</h4>
+          <div class="collection">
+            <a href="#" data-href="/api/demo/status/ok" class="collection-item">200 OK</a>
+            <a href="#" data-href="/api/demo/status/created" class="collection-item">201 CREATED</a>
+            <a href="#" data-href="/api/demo/status/nocontent" class="collection-item">204 NO CONTENT</a>
+            <a href="#" data-href="/api/demo/status/badrequest" class="collection-item">400 BAD REQUEST</a>
+            <a href="#" data-href="/api/demo/status/unauthorized" class="collection-item">401 UNAUTHORIZED</a>
+            <a href="#" data-href="/api/demo/status/forbid" class="collection-item">403 FORBIDDEN</a>
+            <a href="#" data-href="/api/demo/status/internalservererror" class="collection-item">500 INTERNAL SERVER
+              ERROR</a>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <h4>Exceptions</h4>
+          <div class="collection">
+            <a href="#" data-href="/api/demo/exception/handled" class="collection-item">Handled Exception</a>
+            <a href="#" data-href="/api/demo/exception/unhandled" class="collection-item">Unhandled Exception</a>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <h4>Crash</h4>
+          <div class="collection">
+            <a href="#" data-href="/api/demo/heapdump" class="collection-item">Dump heap memory</a>
+            <a href="#" data-href="/api/demo/shutdown" class="collection-item">Shutdown</a>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <h4>Delay Response</h4>
+          <form>
+            <label>Delay in Seconds</label><br>
+            <input type="number" id="txtSeconds" value="10"><br>
+            <button class="btn waves-effect waves-light" id="btnProcess">Process
+              <i class="material-icons right">send</i>
+            </button><br><br>
+            <p id="divResult"></p>
+          </form>
+          <a href="/" class="waves-effect waves-light btn">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="page-footer orange">
+    <div class="footer-copyright">
+      <div class="container">
+        Cloud Native - Demo
+      </div>
+    </div>
+  </footer>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+  <script>
+    $().ready(() => {
+      $('a').click(function () {
+        $.get($(this).attr('data-href'))
+      });
+      $('#btnProcess').click(function () {
+        $('#divResult').text('Started processing...');
+        $.get('/api/demo/delay/' + $('#txtSeconds').val(), function (data, status) {
+          $('#divResult').text("Data: " + data + "\nStatus: " + status);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

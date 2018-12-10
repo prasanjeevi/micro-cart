@@ -1,0 +1,14 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: order
+  security:
+    user:
+      name: admin
+      password: password-1
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
