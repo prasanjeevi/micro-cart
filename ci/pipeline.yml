@@ -1,0 +1,41 @@
+---
+resources:
+- name: resource-git
+  type: git
+  source:
+    uri: {{GIT_URI}}
+- name: resource-cf
+  type: cf
+  source:
+    api: {{CF_API}}
+    username: {{CF_USERNAME}}
+    password: {{CF_PASSWORD}}
+    organization: {{CF_ORG}}
+    space: {{CF_SPACE}}
+    skip_cert_check: {{CF_SKIP_SSL}}
+jobs:
+- name: job-deploy
+  public: true
+  serial: true
+  plan:
+  - get: resource-git
+  - task: build
+    file: resource-git/ci/tasks/build.yml
+  - put: resource-cf
+    params:
+      manifest: resource-git/product-catalog/manifest.yml
+      path: artifacts/product-catalog-0.0.1-SNAPSHOT.jar
+      environment_variables:
+        AQUA_REGISTRY: {{AQUA_REGISTRY}}
+        AQUA_SERVER_URL: {{AQUA_SERVER_URL}}
+        AQUA_USERNAME: {{AQUA_USERNAME}}
+        AQUA_PASSWORD: {{AQUA_PASSWORD}}
+        AQUA_VERIFY_CERTS: {{AQUA_VERIFY_CERTS}}
+  - put: resource-cf
+    params:
+      manifest: resource-git/order/manifest.yml
+      path: artifacts/order-0.0.1-SNAPSHOT.jar
+  - put: resource-cf
+    params:
+      manifest: resource-git/frontend/manifest.yml
+      path: artifacts/frontend-0.0.1-SNAPSHOT.jar

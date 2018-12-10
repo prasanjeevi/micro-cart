@@ -42,3 +42,4 @@ secrets.yml
 
 node_modules
 .DS_Store
+private.yml
