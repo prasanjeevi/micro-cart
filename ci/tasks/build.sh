@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd resource-git
+cd resource-git     
 cd product-catalog
 gradle clean assemble
 cp build/libs/*.jar ../../artifacts/

@@ -14,17 +14,25 @@ resources:
     space: {{CF_SPACE}}
     skip_cert_check: true
 jobs:
+- name: job-test
+  public: false
+  plan:
+    - get: resource-git
+      trigger: true
+    - task: test
+      file: git-repo-test/ci/tasks/test.yml
 - name: job-deploy
   public: true
-  serial: true
   plan:
   - get: resource-git
+    passed: [job-test]
+    trigger: true
   - task: build
     file: resource-git/ci/tasks/build.yml
   - put: resource-cf
     params:
       manifest: resource-git/product-catalog/manifest.yml
-      path: resource-git/artifacts/product-catalog-0.0.1-SNAPSHOT.jar
+      path: artifacts/product-catalog-0.0.1-SNAPSHOT.jar
       environment_variables:
         AQUA_REGISTRY: {{AQUA_REGISTRY}}
         AQUA_SERVER_URL: {{AQUA_SERVER_URL}}
@@ -34,8 +42,8 @@ jobs:
   - put: resource-cf
     params:
       manifest: resource-git/order/manifest.yml
-      path: resource-git/artifacts/order-0.0.1-SNAPSHOT.jar
+      path: artifacts/order-0.0.1-SNAPSHOT.jar
   - put: resource-cf
     params:
       manifest: resource-git/frontend/manifest.yml
-      path: resource-git/artifacts/frontend-0.0.1-SNAPSHOT.jar
+      path: artifacts/frontend-0.0.1-SNAPSHOT.jar
