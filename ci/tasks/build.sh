@@ -17,4 +17,5 @@ gradle clean assemble
 cp build/libs/*.jar ../artifacts/
 ls ../artifacts
 cd ..
-cd ..
+pwd
+ls

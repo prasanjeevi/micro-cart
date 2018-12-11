@@ -12,7 +12,7 @@ resources:
     password: {{CF_PASSWORD}}
     organization: {{CF_ORG}}
     space: {{CF_SPACE}}
-    skip_cert_check: {{CF_SKIP_SSL}}
+    skip_cert_check: true
 jobs:
 - name: job-deploy
   public: true
@@ -24,7 +24,7 @@ jobs:
   - put: resource-cf
     params:
       manifest: resource-git/product-catalog/manifest.yml
-      path: artifacts/product-catalog-0.0.1-SNAPSHOT.jar
+      path: resource-git/artifacts/product-catalog-0.0.1-SNAPSHOT.jar
       environment_variables:
         AQUA_REGISTRY: {{AQUA_REGISTRY}}
         AQUA_SERVER_URL: {{AQUA_SERVER_URL}}
@@ -34,8 +34,8 @@ jobs:
   - put: resource-cf
     params:
       manifest: resource-git/order/manifest.yml
-      path: artifacts/order-0.0.1-SNAPSHOT.jar
+      path: resource-git/artifacts/order-0.0.1-SNAPSHOT.jar
   - put: resource-cf
     params:
       manifest: resource-git/frontend/manifest.yml
-      path: artifacts/frontend-0.0.1-SNAPSHOT.jar
+      path: resource-git/artifacts/frontend-0.0.1-SNAPSHOT.jar
